@@ -1,0 +1,34 @@
+https://www.youtube.com/watch?v=yjdSxL2DWfE
+
+Multilevel Pointer Template:
+=====================================
+Starting Address = value = ?
+base ptr1 -> address A + offset4#* = Starting Address
+base ptr2 -> address B + offset3#* = base ptr1
+base ptr3 -> address C + offset2#* = base ptr2
+Static base** -> address D + offset1#* = base ptr3
+
+
+Note:
+#* = 16位进制 (i.e: esi + 18 = 0x18,填0x18)
+** =  i.e: "Tutorial-x86_64.exe"+2C4A80
+
+Step:
+Starting Address - offset = address A, 
+Use address A value(Click Hex) search "base ptr" address
+Get Static Address.
+=======================================
+Starting Address = value = ?
+0C1A6BC0 -> 035E5F30 + 18 = 035E5F48
+base ptr2 -> 035E5EA0 + 18 = 0C1A6BC0
+base ptr3 -> address C + offset2#* = base ptr2
+Static base** -> address D + offset1#* = base ptr3
+
+
+alloc(dynamicBaseAdd,4)
+registersymbol(dynamicBaseAdd)
+
+push eax
+lea eax, [originalcode]
+mov [dynamicBaseAdd], eax
+pop eax
